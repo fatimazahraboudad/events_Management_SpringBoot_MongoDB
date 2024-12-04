@@ -7,21 +7,22 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 @Document
-public class Evenement {
+public class DelayedNotification {
 
-    @Id
-    private String idEvenement;
-    private String name;
-    private String city;
-    private Long nbr_person;
-    private LocalDateTime date;
+        @Id
+        private String id;
+        private Invited invited;
+        private String eventName;
+        private LocalDateTime sentAt;
+        private boolean sent;
+
 
 }

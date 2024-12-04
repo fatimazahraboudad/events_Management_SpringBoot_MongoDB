@@ -1,6 +1,7 @@
 package com.example.evenementCrud.services;
 
 import com.example.evenementCrud.dtos.InvitedDto;
+import com.example.evenementCrud.entities.DelayedNotification;
 import com.example.evenementCrud.entities.Invited;
 import com.example.evenementCrud.exceptions.InvitedNotFound;
 import com.example.evenementCrud.mappers.EvenementMapper;
@@ -8,6 +9,7 @@ import com.example.evenementCrud.mappers.InvitedMapper;
 import com.example.evenementCrud.repositories.InvitedRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +20,8 @@ public class InvitedServiceImpl implements InvitedService{
 
     private final InvitedRepository invitedRepository;
     private final EvenementService evenementService;
+    private final DelayedNotificationService delayedNotificationService;
+
 
     @Override
     public InvitedDto add(InvitedDto invitedDto) {
@@ -52,10 +56,12 @@ public class InvitedServiceImpl implements InvitedService{
     }
 
     @Override
+    @Transactional
     public InvitedDto addInvitedToEnvent(String idInvited, String idEvenement) {
         Invited invited = getInvitedById(idInvited);
         invited.getEvents().add(EvenementMapper.mapper.toEntity(evenementService.getById(idEvenement)));
 
+        delayedNotificationService.saveDelayedNotification(new DelayedNotification(UUID.randomUUID().toString(),invited,evenementService.getById(idEvenement).getName(),evenementService.getById(idEvenement).getDate().minusMinutes(5),false));
         return InvitedMapper.mapper.toDto(invitedRepository.save(invited));
     }
 

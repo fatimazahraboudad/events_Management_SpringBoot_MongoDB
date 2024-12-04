@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Event Reminder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 0;
+            border-radius: 8px 8px 0 0;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .content h2 {
+            color: #007BFF;
+            font-size: 20px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Reminder: Upcoming Event!</h1>
+    </div>
+    <div class="content">
+        <h2>Dear <span th:text="${name}"></span>,</h2>
+        <p>This is a friendly reminder about your upcoming event:</p>
+        <p><strong>Event Name:</strong> <span th:text="${eventName}"></span></p>
+        <p><strong>Date:</strong> <span th:text="${date}"></span></p>
+        <p><strong>time:</strong> <span th:text="${time}"></span></p>
+        <p>We are excited to have you join us! Please feel free to reach out if you have any questions or need additional information.</p>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>

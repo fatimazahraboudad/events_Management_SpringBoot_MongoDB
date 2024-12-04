@@ -1,22 +1,22 @@
 package com.example.evenementCrud.dtos;
 
+import com.example.evenementCrud.entities.Invited;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class EvenementDto {
+public class DelayedNotificationDto {
 
-    private String idEvenement;
-    private String name;
-    private String city;
-    private Long nbr_person;
-    private LocalDateTime date;
+    private String id;
+    private InvitedDto invited;
+    private String eventName;
+    private LocalDateTime sentAt;
+    private boolean sent;
 }
