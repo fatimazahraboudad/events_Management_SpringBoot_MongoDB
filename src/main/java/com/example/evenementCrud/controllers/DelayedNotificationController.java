@@ -1,7 +1,6 @@
 package com.example.evenementCrud.controllers;
 
 import com.example.evenementCrud.dtos.DelayedNotificationDto;
-import com.example.evenementCrud.dtos.EvenementDto;
 import com.example.evenementCrud.services.DelayedNotificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

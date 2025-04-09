@@ -16,6 +16,5 @@ public interface EvenementMapper {
 
     EvenementDto toDto(Evenement evenement);
 
-    List<Evenement> toEntities(List<EvenementDto> evenementDtos);
     List<EvenementDto> toDtos(List<Evenement> evenemens);
 }

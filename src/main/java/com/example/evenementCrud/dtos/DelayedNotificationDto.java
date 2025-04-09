@@ -1,6 +1,5 @@
 package com.example.evenementCrud.dtos;
 
-import com.example.evenementCrud.entities.Invited;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -8,6 +8,8 @@ import com.example.evenementCrud.mappers.EvenementMapper;
 import com.example.evenementCrud.mappers.InvitedMapper;
 import com.example.evenementCrud.repositories.InvitedRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class InvitedServiceImpl implements InvitedService{
 
 
     @Override
+    @CacheEvict(value = "inv",allEntries = true)
     public InvitedDto add(InvitedDto invitedDto) {
         Invited invited = InvitedMapper.mapper.toEntity(invitedDto);
         invited.setIdIvited(UUID.randomUUID().toString());
@@ -36,6 +39,7 @@ public class InvitedServiceImpl implements InvitedService{
     }
 
     @Override
+    @Cacheable(value = "inv")
     public List<InvitedDto> getAll() {
         return InvitedMapper.mapper.toDtos(invitedRepository.findAll());
     }
@@ -52,7 +56,7 @@ public class InvitedServiceImpl implements InvitedService{
     @Override
     public String delete(String id) {
         invitedRepository.deleteById(id);
-        return "invited delete with success";
+        return "invited deleted with success";
     }
 
     @Override
@@ -64,8 +68,6 @@ public class InvitedServiceImpl implements InvitedService{
         delayedNotificationService.saveDelayedNotification(new DelayedNotification(UUID.randomUUID().toString(),invited,evenementService.getById(idEvenement).getName(),evenementService.getById(idEvenement).getDate().minusMinutes(5),false));
         return InvitedMapper.mapper.toDto(invitedRepository.save(invited));
     }
-
-
 
     public Invited getInvitedById(String id) {
         return invitedRepository.findById(id).orElseThrow(()-> new InvitedNotFound(id));
