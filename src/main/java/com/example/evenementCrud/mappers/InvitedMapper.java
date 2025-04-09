@@ -14,6 +14,5 @@ public interface InvitedMapper {
     Invited toEntity(InvitedDto invitedDto);
 
     InvitedDto toDto(Invited invited);
-    List<Invited> toEntities(List<InvitedDto> invitedDtos);
     List<InvitedDto> toDtos(List<Invited> inviteds);
 }
